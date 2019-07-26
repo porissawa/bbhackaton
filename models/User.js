@@ -7,6 +7,8 @@ const userSchema = new Schema({
   name: String,
   coupon: Number,
   confirmationCode: String,
+  hasConfirmed: Boolean,
+  cpf: String,
 }, {
   timestamps: {
     createdAt: 'created_at',

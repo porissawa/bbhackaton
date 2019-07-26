@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const hbs = require('hbs');
 
 const app = express();
 const PORT = 3000;
@@ -17,9 +18,12 @@ mongoose
   });
 
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 const index = require('./routes/index');
+
 app.use('/', index);
 
 app.listen(PORT, console.log(`Ouvindo na porta ${PORT}`));
