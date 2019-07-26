@@ -1,5 +1,6 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
+const { ensureLoggedIn } = require('connect-ensure-login');
 const User = require('../models/User');
 const Site = require('../models/Site');
 const lojas = require('../seedlojas.json');
@@ -54,7 +55,7 @@ router.get('/', (req, res) => {
 
 router.get('/cupom/:confirmationCode', (req, res) => {
   const validCode = req.params.confirmationCode;
-  User.findOne({ confirmationCode: validCode })
+  User.findOneAndUpdate({ confirmationCode: validCode }, { hasConfirmed: true })
     .then((user) => {
       Site.findById(process.env.LOCALSITEDOCID)
         .then((site) => {
@@ -71,7 +72,7 @@ router.get('/cupom/:confirmationCode', (req, res) => {
 router.post('/sendform', (req, res) => {
   const {
     name,
-    email,
+    username,
     cpf,
   } = req.body;
 
@@ -87,7 +88,7 @@ router.post('/sendform', (req, res) => {
     let newUser = {};
 
     if (testaCPF(cpf)) {
-      newUser = new User({ name, email, cpf, confirmationCode: confCode });
+      newUser = new User({ name, username, cpf, confirmationCode: confCode });
       newUser.save()
         .then((usr) => {
           Site.findById(process.env.LOCALSITEDOCID)
@@ -106,7 +107,7 @@ router.post('/sendform', (req, res) => {
 
               transporter.sendMail({
                 from: '"BluLife 👻" <bluelife@ironhackers.dev>',
-                to: email,
+                to: username,
                 subject: 'Welcome to Servo-Service! Please confirm your account.',
                 text: `
                 Hi, there!
@@ -136,6 +137,14 @@ router.post('/sendform', (req, res) => {
       res.render('index', { message: req.flash('error') });
     }
   });
+});
+
+router.get('/dashboard', ensureLoggedIn(), (req, res) => {
+  Site.findById(process.env.LOCALSITEDOCID)
+    .then((site) => {
+      res.render('dashboard', { site });
+    })
+    .catch(e => console.log(e));
 });
 
 
