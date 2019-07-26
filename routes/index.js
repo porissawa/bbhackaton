@@ -9,7 +9,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/cupom/:confirmationCode', (req, res) => {
-  res.render('/cupom');
+  const validCode = req.params.confirmationCode;
+  User.findOne({confirmationCode: validCode})
+  .then((user) => res.render('cupom', {user}))
+  .catch(err => console.log)
 });
 
 router.post('/sendform', (req, res) => {
@@ -71,5 +74,6 @@ router.post('/sendform', (req, res) => {
   // }
 
 });
+
 
 module.exports = router;
