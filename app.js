@@ -9,11 +9,10 @@ const hbs = require('hbs');
 const flash = require('connect-flash');
 const session = require('express-session');
 const app = express();
-const PORT = 3000;
 
-//local DB: mongodb://localhost/bbhackaton
+// local DB: mongodb://localhost/bbhackaton
 mongoose
-  .connect('mongodb://localhost/bbhackaton', { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
   })
@@ -41,6 +40,6 @@ const index = require('./routes/index');
 
 app.use('/', index);
 
-app.listen(PORT, console.log(`Ouvindo na porta ${PORT}`));
+app.listen(process.env.PORT, console.log(`Listening on port ${process.env.PORT}`));
 
 module.exports = app;
