@@ -1,0 +1,84 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
+
+/* General */
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.header img {
+  height: 40px;
+}
+
+
+/* Principal*/
+
+#principal {
+  height: 100vh;
+  background-image: url('../images/berry-blueberries-blueberry-583837.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+#principal h1 {
+  font-weight: 700;
+  font-size: 50px;
+}
+
+#principal p {
+  font-size: 28px;
+  font-weight: 500;
+  margin: 30px;
+}
+
+
+.principal-content {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.btn-radius {
+  border-radius: 50px;
+  background: #C53BBF;
+  color: #FFFFFF;
+  padding: 15px 25px;
+  font-weight: 600;
+}
+
+/* Benefits */
+
+#benefits h2 {
+  color: #443AAF;
+  text-align: center;
+}
+
+#benefits h3 {
+  color: #443AAF;
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+
+.benefits-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.benefits-list img {
+  border-radius: 100%;
+  width: 170px;
+  margin-bottom: 25px;
+}
