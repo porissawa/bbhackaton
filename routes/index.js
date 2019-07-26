@@ -4,8 +4,10 @@ const Site = require('../models/Site');
 
 const router = express.Router();
 
+const {MAPSKEY} = process.env;
+
 router.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', {MAPSKEY});
 });
 
 router.get('/cupom/:confirmationCode', (req, res) => {
@@ -14,6 +16,8 @@ router.get('/cupom/:confirmationCode', (req, res) => {
   .then((user) => res.render('cupom', {user}))
   .catch(err => console.log)
 });
+
+// router.get()
 
 router.post('/sendform', (req, res) => {
   // console.log(req.body);

@@ -13,3 +13,4 @@
 {"address": "Av. Alcântara Machado", "number": "576", "zipCode": "03102-000", "neighborhood":    "Brás", "city": "São Paulo", "UF": "SP", "location": ["-46.619414", "-23.552799"]},
 {"address": "Av. Imirim",   "number": "1217", "zipCode":  "02465-100",  "neighborhood": "Imirim", "city": "São Paulo", "UF": "SP", "location": ["-46.646239", "-23.494115"]},
 {"address": "Av. Roque Petroni Júnior",    "number": "1089",   "zipCode": "04707-000", "neighborhood":   "Jardim das Acácias",    "city": "São Paulo", "UF": "SP", "location": ["-46.698717","-23.622961"]}]
+
