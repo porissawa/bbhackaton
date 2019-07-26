@@ -2,6 +2,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const Site = require('../models/Site');
+const lojas = require('../seedlojas.json');
 
 const router = express.Router();
 
@@ -41,18 +42,30 @@ function generateConfCode() {
 }
 
 router.get('/', (req, res) => {
-  Site.findById('5d3b0a2877bf8e034964d4a4')
+  Site.findById(process.env.LOCALSITEDOCID)
     .then((site) => {
       const newAccessCount = site.accesses + 1;
-      Site.findByIdAndUpdate('5d3b0a2877bf8e034964d4a4', { accesses: newAccessCount })
-        .then(() => res.render('index'))
+      Site.findByIdAndUpdate(process.env.LOCALSITEDOCID, { accesses: newAccessCount })
+        .then(() => res.render('index', { lojas }))
         .catch(e => console.log(e));
     })
     .catch(e => console.log(e));
 });
 
 router.get('/cupom/:confirmationCode', (req, res) => {
-  res.render('cupom');
+  const validCode = req.params.confirmationCode;
+  User.findOne({ confirmationCode: validCode })
+    .then((user) => {
+      Site.findById(process.env.LOCALSITEDOCID)
+        .then((site) => {
+          const newConfirmedSignupsCount = site.confirmedSignups + 1;
+          Site.findByIdAndUpdate(process.env.LOCALSITEDOCID, { confirmedSignups: newConfirmedSignupsCount })
+            .then(() => res.render('cupom', { user }))
+            .catch(e => console.log(e));
+        })
+        .catch(e => console.log(e));
+    })
+    .catch(err => console.log(err));
 });
 
 router.post('/sendform', (req, res) => {
@@ -77,7 +90,7 @@ router.post('/sendform', (req, res) => {
       newUser = new User({ name, email, cpf, confirmationCode: confCode });
       newUser.save()
         .then((usr) => {
-          Site.findById('5d3b0a2877bf8e034964d4a4')
+          Site.findById(process.env.LOCALSITEDOCID)
             .then((site) => {
             // send email
               const transporter = nodemailer.createTransport({
@@ -99,14 +112,14 @@ router.post('/sendform', (req, res) => {
                 Hi, there!
                 Welcome to Servo-Service, the premier service for services!
                 Please, click on the link below to confirm your account:
-                http://ADICIONAR ROTA AQUI/${confCode}`,
+                http://blulife.ironhackers.tech/cupom/${confCode}`,
                 html: `
                 <h3>Hi, there!</h3>
                 <p>Welcome to BluLife, the premier service for services!</p>
-                <p>Please, click <a href="http://ADICIONARROTAAQUI/${confCode}">here</a> to confirm your account.</p>`,
+                <p>Please, click <a href="http://blulife.ironhackers.tech/cupom/${confCode}">here</a> to confirm your account.</p>`,
               });
               const newSignupsCount = site.signups + 1;
-              Site.findByIdAndUpdate('5d3b0a2877bf8e034964d4a4', { signups: newSignupsCount })
+              Site.findByIdAndUpdate(process.env.LOCALSITEDOCID, { signups: newSignupsCount })
                 //
                 //
                 // RENDER VAI SER ESSE?
