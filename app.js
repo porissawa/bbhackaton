@@ -11,6 +11,7 @@ const session = require('express-session');
 const app = express();
 const PORT = 3000;
 
+//local DB: mongodb://localhost/bbhackaton
 mongoose
   .connect('mongodb://localhost/bbhackaton', { useNewUrlParser: true })
   .then((x) => {

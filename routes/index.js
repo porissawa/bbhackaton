@@ -61,8 +61,12 @@ router.post('/sendform', (req, res) => {
     newUser = new User({ name, email, cpf, confirmationCode: confCode });
     newUser.save()
       .then((user) => {
-        console.log(user);
-        res.render('index');
+        Site.findById(process.env.LOCALSITEDOCID)
+          .then((site) => {
+            console.log(site);
+            res.render('index');
+          })
+          .catch(err => console.log(err));
       })
       .catch(e => console.log(e));
   } else {
