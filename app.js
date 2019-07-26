@@ -14,11 +14,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/User');
 
 const app = express();
-const PORT = 3000;
 
-//local DB: mongodb://localhost/bbhackaton
+// local DB: mongodb://localhost/bbhackaton
 mongoose
-  .connect('mongodb://localhost/bbhackaton', { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
   })
@@ -80,6 +79,6 @@ const authRoutes = require('./routes/auth');
 
 app.use('/', authRoutes);
 
-app.listen(PORT, console.log(`Ouvindo na porta ${PORT}`));
+app.listen(process.env.PORT, console.log(`Ouvindo na porta ${process.env.PORT}`));
 
 module.exports = app;
