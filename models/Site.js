@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const siteSchema = new Schema({
   accesses: Number,
-  uniqueAccesses: Number,
+  ips: [String],
   signups: Number,
   confirmedSignups: Number,
   leads: { type: Schema.Types.ObjectId, ref: 'User' },
