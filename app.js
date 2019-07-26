@@ -2,9 +2,11 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const path = require('path');
 const hbs = require('hbs');
-
+const flash = require('connect-flash');
+const session = require('express-session');
 const app = express();
 const PORT = 3000;
 
@@ -18,9 +20,19 @@ mongoose
   });
 
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: 'blueberries',
+  resave: true,
+  saveUninitialized: true,
+}));
+app.use(flash());
 
 const index = require('./routes/index');
 
