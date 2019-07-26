@@ -9,11 +9,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/cupom/:confirmationCode', (req, res) => {
-  res.render('/cupom');
+  res.render('cupom');
 });
 
 router.post('/sendform', (req, res) => {
-  // console.log(req.body);
   const {
     name,
     email,
@@ -63,11 +62,12 @@ router.post('/sendform', (req, res) => {
     newUser.save()
       .then((user) => {
         console.log(user);
-        res.redirect('confirmed');
+        res.render('index');
       })
       .catch(e => console.log(e));
   } else {
-    res.render('index', { 'message': req.flash('error') })
+    req.flash('error', 'Please, check your CPF number and try again.');
+    res.render('index', { message: req.flash('error') });
   }
 });
 
