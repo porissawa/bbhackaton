@@ -10,13 +10,40 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 20px;
+}
+
+.header img {
+  margin-top: 0.5rem;
+}
+
+.nav-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #000;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 .header img {
   height: 40px;
 }
 
+#nav-cta {
+  border-radius: 50px;
+  background-color: #C53BBF;
+  color: #FFF;
+  height: 2.3rem;
+  width: 11.5rem;
+}
 
 /* Principal*/
 
@@ -81,4 +108,53 @@ body {
   border-radius: 100%;
   width: 170px;
   margin-bottom: 25px;
+}
+
+/* CUPOM */
+.coupon-container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../images/coupon/bgcoupom.png');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.coupon-div {
+  background-color: #FFF;
+  border-radius: 10px;
+  width: 50%;
+  height: 60%;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.redeem {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+}
+
+.redeem-info {
+  text-align: center;
+  color: white;
+  background-color: #464B9B;
+  width: 60%;
+}
+
+.text-div h1 {
+  font-size: 20px;
+}
+
+.text-div p {
+  font-size: 14px;
+  width: 70%;
+}
+
+.coupon-bbs {
+  width: 10rem;
 }

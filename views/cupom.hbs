@@ -1,10 +1,17 @@
-<div class="container">
-
-  <h1>Seu cupom foi gerado com sucesso</h1>
-
-  <p>Agora você só precisa imprimir este cupom e ir para uma de nossas <a href="#">lojas</a> e retirar seu produto</p>
-
-  <div class="cupom">
-
+<div class="coupon-container">
+  <div class="coupon-div">
+    <div class="content-div">
+      <div class="redeem">
+      <img src="../images/coupon/blueberries_stack.png" alt="blueberries" class="coupon-bbs"/>
+        <div class="redeem-info">
+          <p>{{user.name}}</p>
+          <p>CUPOM CÓDIGO: 1SJD8{{user.confirmationCode}}</p>
+        </div>
+      </div>
+      <div class="text-div">
+      <h1>Seu cupom foi gerado com sucesso</h1>
+      <p>Agora é só mostrar o cupom em uma de nossas <a href="https://blulife.herokuapp.com/#map">lojas</a> e retirar seu produto</p>
+      </div>
+  </div>
   </div>
 </div>

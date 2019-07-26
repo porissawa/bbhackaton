@@ -9,7 +9,7 @@ const storeSchema = new Schema({
   neighborhood: String,
   city: String,
   UF: String,
-  location: Array, 
+  location: Array,
 }, {
   timestamps: {
     createdAt: 'created_at',

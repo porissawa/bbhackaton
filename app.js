@@ -17,7 +17,7 @@ const app = express();
 
 // local DB: mongodb://localhost/bbhackaton
 mongoose
-  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+  .connect('mongodb://localhost/bbhackaton', { useNewUrlParser: true })
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
   })

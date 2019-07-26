@@ -54,11 +54,11 @@ router.get('/', (req, res) => {
 });
 
 router.get('/cupom/:confirmationCode', (req, res) => {
-  const validCode = req.params.confirmationCode;
-  User.findOneAndUpdate({ confirmationCode: validCode }, { hasConfirmed: true })
+  User.findOneAndUpdate({ confirmationCode: req.params.confirmationCode }, { hasConfirmed: true })
     .then((user) => {
       Site.findById(process.env.LOCALSITEDOCID)
         .then((site) => {
+          console.log(user);
           const newConfirmedSignupsCount = site.confirmedSignups + 1;
           Site.findByIdAndUpdate(process.env.LOCALSITEDOCID, { confirmedSignups: newConfirmedSignupsCount })
             .then(() => res.render('cupom', { user }))
@@ -106,26 +106,21 @@ router.post('/sendform', (req, res) => {
               });
 
               transporter.sendMail({
-                from: '"BluLife 👻" <bluelife@ironhackers.dev>',
+                from: '"BluLife" <bluelife@gin.ink>',
                 to: username,
-                subject: 'Welcome to Servo-Service! Please confirm your account.',
+                subject: 'Welcome to BluLife! Click to redeem your coupon.',
                 text: `
                 Hi, there!
-                Welcome to Servo-Service, the premier service for services!
-                Please, click on the link below to confirm your account:
+                Welcome to BluLife, the super blueberry!
+                Please, click on the link below to redeem your coupon:
                 http://blulife.ironhackers.tech/cupom/${confCode}`,
                 html: `
                 <h3>Hi, there!</h3>
-                <p>Welcome to BluLife, the premier service for services!</p>
-                <p>Please, click <a href="http://blulife.ironhackers.tech/cupom/${confCode}">here</a> to confirm your account.</p>`,
+                <p>Welcome to BluLife, the super blueberry!</p>
+                <p>Please, click <a href="http://blulife.ironhackers.tech/cupom/${confCode}">here</a> to redeem your coupon.</p>`,
               });
               const newSignupsCount = site.signups + 1;
               Site.findByIdAndUpdate(process.env.LOCALSITEDOCID, { signups: newSignupsCount })
-                //
-                //
-                // RENDER VAI SER ESSE?
-                //
-                //
                 .then(() => res.render('index'))
                 .catch(e => console.log(e));
             })
