@@ -1,8 +1,53 @@
-<section class="coupon">
-  <form action="/sendform" method="POST">
-    <input type="text" name="name" placeholder="Insira seu nome completo">
-    <input type="text" name="cpf" placeholder="Insira seu CPF">
-    <input type="text" name="email" placeholder="Insira seu e-mail">
-    <input type="submit" value="Enviar!">
-  </form>
+<section id="principal">
+  <h1>the red brown fox jumps over</h1>
+  <p>the red brown fox jumps over</p>
+  <button type="button" class="btn btn-radius" data-toggle="modal" data-target="#exampleModalScrollable">
+    Experimente agora
+  </button>
 </section>
+
+<section id="map">
+  <div id="maps" style="width: 60%; height: 300px; border: 1px solid black">
+  </div>
+</section>
+
+
+
+<!-- Modal formulário -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Dados para retirar cupom</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section id="coupon">
+          <form action="/sendform" method="POST">
+            <div class="form-group">
+              <label for="name">Nome completo:</label>
+              <input type="text" name="name" id="name" class="form-control" placeholder="Insira seu nome completo">
+            </div>
+            <div class="form-group">
+              <label for="name">CPF:</label>
+              <input type="text" name="cpf" id="cpf" class="form-control" placeholder="Insira seu CPF">
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" name="email" id="email" class="form-control" placeholder="Insira seu e-mail">
+            </div>
+            <input type="submit" class="btn btn-success" value="Enviar!">
+          </form>
+        </section>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
