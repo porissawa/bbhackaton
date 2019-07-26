@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 
 const app = express();
+const PORT = 3000;
 
 mongoose
   .connect('mongodb://localhost/bbhackaton', { useNewUrlParser: true })
@@ -17,5 +18,10 @@ mongoose
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+const index = require('./routes/index');
+app.use('/', index);
+
+app.listen(PORT, console.log(`Ouvindo na porta ${PORT}`));
 
 module.exports = app;
